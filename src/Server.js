@@ -1,7 +1,8 @@
 'use strict';
 
-const {Configurator} = require("./lib/Configurator");
 const express = require('express');
+const path = require("path");
+const {Configurator} = require("./lib/Configurator");
 
 class Server {
     /**
@@ -15,8 +16,7 @@ class Server {
     }
 
     /**
-     * Constructs configuration object.
-     * @constructor
+     * Start server instance.
      */
     start() {
 
@@ -30,6 +30,63 @@ class Server {
             console.log(`Server::start error: ${e}`);
             return false;
         }
+    }
+
+    /**
+     * Stop server instance.
+     */
+    stop() {
+
+        let {web} = JSON.parse(process.env.CONFIG);
+
+        this.instance.close(() => {
+
+            console.log(`Server stopped on http://${web.address}:${web.port}/`);
+        });
+    }
+
+    /**
+     * Set Static route.
+     * @param {string} friendlyRoute is the route of subdirector
+     * @param {string} sourcePath is the path of static source code
+     */
+    setStaticRoute(friendlyRoute, sourcePath) {
+
+        this.app.use(friendlyRoute, express.static(path.join(__dirname, `../${sourcePath}`)));
+    }
+
+    /**
+     * Set Get route.
+     * @param {string} path is the route of subdirector
+     * @param {function} handle is the primary handle route
+     * @param {function} middleware is the behaviour before primary handle route
+     */
+    setGetter(path, handle, middleware = null) {
+
+        if (!middleware || typeof middleware !== 'function') {
+
+            middleware = (req, res, next) => {
+                next();
+            };
+        }
+        this.app.get(path, middleware, handle);
+    }
+
+    /**
+     * Set Post route.
+     * @param {string} path is the route of subdirector
+     * @param {function} handle is the primary handle route
+     * @param {function} middleware is the behaviour before primary handle route
+     */
+    setPoster(path, handle, middleware = null) {
+
+        if (!middleware || typeof middleware !== 'function') {
+
+            middleware = (req, res, next) => {
+                next();
+            };
+        }
+        this.app.post(path, middleware, handle);
     }
 
     /**
