@@ -1,27 +1,36 @@
 'use strict';
 
 const assert = require('assert');
-const {Configurator} = require("../src/lib/Configurator");
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const expect = chai.expect;
+const {Server} = require("../src/Server");
 
-describe('Configurator setConfig method', () => {
+chai.use(chaiHttp);
+
+describe('Server start method', () => {
 
     before(() => {
 
-        Configurator.setConfig();
+        Server.start();
     });
 
-    it('should set default process.env.CONFIG property as a JSON string', () => {
+    after(() => {
 
-        let localfilename = 'default.json';
-        let localJSON = require(`../config/${localfilename}`);
-        assert.equal(process.env.CONFIG, JSON.stringify(localJSON));
+        Server.instance.close();
     });
 
-    it('should set custom process.env.CONFIG property as a JSON string', () => {
+    it('should set Express server property', () => {
 
-        let localfilename = 'default.json';
-        let localJSON = require(`../config/${localfilename}`);
-        let customJSON = {"web": {"address": "192.168.1.1", "port": "9000"}};
-        assert.equal(process.env.CONFIG, JSON.stringify({...customJSON, ...localJSON}));
+        assert.equal(typeof Server.instance, 'object');
+    });
+
+    it('expect respond with status 404', (done) => {
+        chai.request(Server.app)
+            .get('/')
+            .end((err, res) => {
+                expect(res).to.have.status(404);
+                done();
+            });
     });
 });
