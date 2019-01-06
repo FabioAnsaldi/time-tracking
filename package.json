@@ -1,0 +1,21 @@
+{
+  "name": "time-tracking",
+  "version": "1.0.0",
+  "description": "Time Tracking is a software that I use to register the time I spend on my projects to create correct invoices for my customers.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha || true"
+  },
+  "repository": "https://github.com/FabioAnsaldi/time-tracking.git",
+  "author": "Fabio Ansaldi",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "mocha": "^5.2.0"
+  }
+}
