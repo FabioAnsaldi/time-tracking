@@ -1,6 +1,6 @@
 'use strict';
 
-const {Server} = require("./src/Server");
+const {Server} = require("./utils/Server");
 
 Server.start();
 

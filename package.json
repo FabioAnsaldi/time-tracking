@@ -5,13 +5,17 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "dev": "webpack --config ./config/webpack.dev.js",
+    "prod": "webpack --config ./config/webpack.prod.js",
     "test": "mocha || true"
   },
   "repository": "https://github.com/FabioAnsaldi/time-tracking.git",
   "author": "Fabio Ansaldi",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
