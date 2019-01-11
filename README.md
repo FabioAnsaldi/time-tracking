@@ -4,6 +4,7 @@ Time Tracking is a software that I use to register the time I spend on my projec
 ## Table of contents
 - [Local Setup](#local-setup)
 - [Installation](#installation)
+- [Testing](#testing)
 - [Contributing](#contributing)
 
 ### Local Setup
@@ -11,6 +12,8 @@ To preview the website locally you have to install on your local machine the lis
 1. Install [git](https://git-scm.com/) to manage Git repository.
 2. Install [yarn](https://yarnpkg.com/lang/en/) to run the web server or to run test service.
 3. You also need to install [nodejs](https://nodejs.org/en/) on your local machine to execute the source code.
+
+You should be use v8.14.0 version or higher of NodeJs!
 
 ### Installation
 
@@ -36,7 +39,7 @@ Go to ***config*** directory and edit the ***custom_name.json*** file
 Insert your custom configuration for web server
 ```json
   "web": {
-    "address": "LOCAL_IP_ADDRESS,
+    "address": "LOCAL_IP_ADDRESS",
     "port": "LOCAL_PORT"
   },
 ```
@@ -61,6 +64,13 @@ If the your_local_address_ip is 127.0.0.1 and the port is 8080, you will see som
 ```sh
 Server listening on http://127.0.0.1:8080/
 ```
+
+### Testing
+To test the application, you have to run the below command
+```sh
+$ yarn run test
+```
+
 
 ### Contributing
 
