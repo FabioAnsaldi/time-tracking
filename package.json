@@ -13,13 +13,14 @@
   "author": "Fabio Ansaldi",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.4",
-    "webpack": "^4.28.4",
-    "webpack-cli": "^3.2.1"
+    "express": "^4.16.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "webpack-merge": "^4.2.1"
   }
 }
