@@ -4,7 +4,7 @@ const assert = require('assert');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const expect = chai.expect;
-const {Server} = require("../src/Server");
+const {Server} = require("../utils/Server");
 
 chai.use(chaiHttp);
 

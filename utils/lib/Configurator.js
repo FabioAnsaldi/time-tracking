@@ -12,10 +12,16 @@ class Configurator {
      */
     constructor() {
 
-        let filename = process.argv[2] || 'default';
-        let localfilename = 'default.json';
+        let filename = process.argv[2];
+        let localfilename = 'default';
 
-        this.customConfigFile = require(`../../config/${filename}`);
+        if (filename) {
+
+            this.customConfigFile = require(`../../config/${filename}`);
+        } else {
+
+            this.customConfigFile = {};
+        }
         this.localConfigFile = require(`../../config/${localfilename}`);
     }
 
@@ -26,7 +32,7 @@ class Configurator {
 
         try {
 
-            this.configuration = {...this.customConfigFile, ...this.localConfigFile};
+            this.configuration = {...this.localConfigFile, ...this.customConfigFile};
             process.env.CONFIG = JSON.stringify(this.configuration);
             return true;
         } catch (e) {
@@ -38,7 +44,7 @@ class Configurator {
 
     /**
      * Set custom configuration property.
-     * @param {string} filename is a name of the file.
+     * @param {object} filename is a name of the file.
      */
     set customConfigFile(filename) {
 
@@ -56,7 +62,7 @@ class Configurator {
 
     /**
      * Set local configuration property.
-     * @param {string} customConfig is a name of the file.
+     * @param {object} customConfig is a name of the file.
      */
     set localConfigFile(customConfig) {
 
