@@ -1,11 +1,4 @@
 {
-  "app": {
-    "configuration": "config",
-    "source": "src",
-    "build": "dist",
-    "assets": "/",
-    "bundle": "bundle.js"
-  },
   "web": {
     "address": "127.0.0.1",
     "port": "8080"
