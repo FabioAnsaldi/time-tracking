@@ -24,7 +24,7 @@ describe('Configurator setConfig method', () => {
 
         let localfilename = 'default';
         let localJSON = require(`../config/${localfilename}`);
-        let customJSON = {"web": {"address": "10.127.0.81", "port": "8000"}};
+        let customJSON = {"web": {"address": "127.0.1.1", "port": "9090"}};
         let merged = {...localJSON, ...customJSON};
         let sortable = {};
 
