@@ -4,13 +4,14 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from './actions';
 import * as functions from './functions';
+import Layout from '../layout/index.jsx';
 
 export class Application extends Component {
 
     render() {
 
         return (
-            <div>A</div>
+            <Layout/>
         );
     }
 }
