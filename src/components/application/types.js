@@ -7,6 +7,7 @@ let actions_types = [
 
 const TYPES = {};
 actions_types.map((string) => {
+
     TYPES[string] = 'APPLICATION_' + string;
 });
 

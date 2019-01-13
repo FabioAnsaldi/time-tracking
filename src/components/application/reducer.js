@@ -3,13 +3,8 @@
 import TYPES from './types';
 
 export const initialState = {
-    layout: 'Main',
-    player: 'X',
-    lang: 'it',
-    avaibleLang: ['it', 'en'],
-    loading: [],
+
     menuOpen: false,
-    user: null,
     routes: [
         {
             default: true,
@@ -18,12 +13,13 @@ export const initialState = {
             viewFolderName: 'Home'
         }
     ],
-    error: '',
-    accesstoken: false
+    error: ''
 };
 
-const controllerReducer = (state = initialState, action) => {
+const applicationReducer = (state = initialState, action) => {
+
     switch (action.type) {
+
         case TYPES.RESET_STATE:
             return Object.assign({}, state, initialState);
         case TYPES.SET_ROUTES:
@@ -37,4 +33,4 @@ const controllerReducer = (state = initialState, action) => {
     }
 };
 
-export default controllerReducer;
+export default applicationReducer;

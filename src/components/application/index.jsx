@@ -8,6 +8,7 @@ import * as functions from './functions';
 export class Application extends Component {
 
     render() {
+
         return (
             <div>A</div>
         );
@@ -15,7 +16,9 @@ export class Application extends Component {
 }
 
 function mapStateToProps(state) {
+
     return {
+
         applicationReducer: state.applicationReducer
     };
 }
