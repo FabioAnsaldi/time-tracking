@@ -1,9 +1,9 @@
 'use strict';
 
-import {initialState} from './reducer';
+import { initialState } from './reducer';
 import TYPES from './types';
 
-export const resetLayout = () => {
+export const resetHome = () => {
 
     return Object.assign({}, {
 
@@ -19,13 +19,3 @@ export const setError = (input) => {
         error: input
     };
 };
-
-export const setPages = (input) => {
-
-    return {
-
-        type: TYPES.SET_PAGES,
-        page: input
-    };
-};
-

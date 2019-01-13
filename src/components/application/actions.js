@@ -3,7 +3,7 @@
 import {initialState} from './reducer';
 import TYPES from './types';
 
-export const resetState = () => {
+export const resetApplication = () => {
 
     return Object.assign({}, {
 
@@ -29,11 +29,11 @@ export const setRoutes = (input) => {
     };
 };
 
-export const errorRequest = (input) => {
+export const setError = (input) => {
 
     return {
 
-        type: TYPES.ERROR_REQUEST,
+        type: TYPES.SET_ERROR,
         error: input
     };
 };

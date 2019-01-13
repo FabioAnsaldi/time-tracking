@@ -26,7 +26,7 @@ const applicationReducer = (state = initialState, action) => {
             return Object.assign({}, state, {'routes': action.routes});
         case TYPES.SET_MENU_STATE:
             return Object.assign({}, state, {'menuOpen': action.menuOpen});
-        case TYPES.ERROR_REQUEST:
+        case TYPES.SET_ERROR:
             return Object.assign({}, state, {'error': action.error});
         default:
             return state;

@@ -1,7 +1,20 @@
 'use strict';
 
+const history = require('connect-history-api-fallback');
 const {Server} = require("./utils/Server");
+const config = require('./config/app.config.json');
 
+const historyOption = {
+
+    verbose: true,
+    index: config.app.publicPath + 'index.html',
+    rewrites: [
+        {from: config.app.bundle, to: '/' + config.app.bundle},
+        {from: /^\/.*$/, to: '/'}
+    ],
+    disableDotRule: true
+};
+Server.app.use(history(historyOption));
 Server.setStaticRoute('/', '/dist');
 Server.start();
 

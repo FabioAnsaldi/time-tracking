@@ -2,7 +2,7 @@ let actions_types = [
     'RESET_STATE',
     'SET_ROUTES',
     'SET_MENU_STATE',
-    'ERROR_REQUEST'
+    'SET_ERROR'
 ];
 
 const TYPES = {};
