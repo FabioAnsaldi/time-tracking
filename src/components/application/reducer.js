@@ -10,7 +10,12 @@ export const initialState = {
             default: true,
             label: 'Home',
             path: '/home',
-            viewFolderName: 'Home'
+            viewFolderName: 'home'
+        },
+        {
+            label: 'Tracking',
+            path: '/tracking',
+            viewFolderName: 'tracking'
         }
     ],
     pages: [],

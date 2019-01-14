@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import * as actions from './actions';
 import * as functions from './functions';
-//import Topbar from '../../widgets/Topbar/index.jsx';
+import Topbar from '../widgets/topbar/index.jsx';
 //import AlertDialog from '../../widgets/AlertDialog/index.jsx';
 //import WinDialog from '../../widgets/WinDialog/index.jsx';
 
@@ -17,7 +17,7 @@ export class Layout extends Component {
         return (
             <div>
                 <header>
-
+                    <Topbar/>
                 </header>
                 <main>
                     <Switch>
