@@ -7,7 +7,7 @@ let reduxs = {};
 Object.keys(reducers).forEach((key) => {
 
     let name = key.replace('views$', '').toLowerCase();
-    reduxs[name] = reducers[key];
+    reduxs[`${name}State`] = reducers[key];
 });
 
 const combination = combineReducers(reduxs);

@@ -19,13 +19,3 @@ export const setError = (input) => {
         error: input
     };
 };
-
-export const setPages = (input) => {
-
-    return {
-
-        type: TYPES.SET_PAGES,
-        page: input
-    };
-};
-

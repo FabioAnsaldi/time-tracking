@@ -10,6 +10,7 @@ const historyOption = {
     index: config.app.publicPath + 'index.html',
     rewrites: [
         {from: config.app.bundle, to: '/' + config.app.bundle},
+        {from: 'manifest.json', to: '/manifest.json'},
         {from: /^\/.*$/, to: '/'}
     ],
     disableDotRule: true

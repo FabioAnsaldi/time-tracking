@@ -13,10 +13,11 @@ export const initialState = {
             viewFolderName: 'Home'
         }
     ],
+    pages: [],
     error: ''
 };
 
-const applicationReducer = (state = initialState, action) => {
+const applicationState = (state = initialState, action) => {
 
     switch (action.type) {
 
@@ -26,6 +27,8 @@ const applicationReducer = (state = initialState, action) => {
             return Object.assign({}, state, {'routes': action.routes});
         case TYPES.SET_MENU_STATE:
             return Object.assign({}, state, {'menuOpen': action.menuOpen});
+        case TYPES.SET_PAGES:
+            return Object.assign({}, state, {'pages': action.pages});
         case TYPES.SET_ERROR:
             return Object.assign({}, state, {'error': action.error});
         default:
@@ -33,4 +36,4 @@ const applicationReducer = (state = initialState, action) => {
     }
 };
 
-export default applicationReducer;
+export default applicationState;

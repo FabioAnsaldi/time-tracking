@@ -22,7 +22,7 @@ function mapStateToProps(state) {
 
     return {
 
-        homeReducer: state.homeReducer
+        homeState: state.homeState
     };
 }
 
