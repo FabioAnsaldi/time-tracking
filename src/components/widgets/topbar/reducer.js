@@ -2,7 +2,10 @@
 
 import TYPES from './types';
 
-export const initialState = {};
+export const initialState = {
+
+    open: false
+};
 
 const topbarState = (state = initialState, action) => {
 
@@ -10,6 +13,10 @@ const topbarState = (state = initialState, action) => {
 
         case TYPES.RESET_STATE:
             return Object.assign({}, state, initialState);
+        case TYPES.SET_OPEN:
+            return Object.assign({}, state, {'open': action.open});
+        case TYPES.SET_ERROR:
+            return Object.assign({}, state, {'error': action.error});
         default:
             return state;
     }

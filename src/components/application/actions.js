@@ -29,15 +29,6 @@ export const setRoutes = (input) => {
     };
 };
 
-export const setPages = (input) => {
-
-    return {
-
-        type: TYPES.SET_PAGES,
-        pages: input
-    };
-};
-
 export const setError = (input) => {
 
     return {

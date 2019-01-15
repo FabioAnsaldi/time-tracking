@@ -1,8 +1,6 @@
 let actions_types = [
     'RESET_STATE',
     'SET_ROUTES',
-    'SET_MENU_STATE',
-    'SET_PAGES',
     'SET_ERROR'
 ];
 
