@@ -17,7 +17,6 @@ export const initialState = {
             viewFolderName: 'tracking'
         }
     ],
-    pages: [],
     error: ''
 };
 
