@@ -1,14 +1,14 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React, {Component, Suspense} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-import * as actions from './actions';
-import Topbar from '../widgets/topbar/index.jsx';
+
 import * as VIEWS from '../views/**/index.jsx';
 //import AlertDialog from '../../widgets/AlertDialog/index.jsx';
 //import WinDialog from '../../widgets/WinDialog/index.jsx';
+const Topbar = React.lazy(() => import('../widgets/topbar/index.jsx'));
 
 export class Layout extends Component {
 
@@ -31,7 +31,9 @@ export class Layout extends Component {
         return (
             <div>
                 <header>
-                    <Topbar/>
+                    <Suspense fallback={<div></div>}>
+                        <Topbar/>
+                    </Suspense>
                 </header>
                 <main>
                     {viewsList}

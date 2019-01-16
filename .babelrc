@@ -4,6 +4,7 @@
     "@babel/preset-react"
   ],
   "plugins": [
-    "import-glob"
+    "import-glob",
+    "@babel/plugin-syntax-dynamic-import"
   ]
 }
