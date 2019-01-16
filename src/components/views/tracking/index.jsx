@@ -3,8 +3,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-import * as trackingActions from './actions';
-import * as trackingFunctions from './functions';
+import * as actions from './actions';
 
 export class Tracking extends Component {
 

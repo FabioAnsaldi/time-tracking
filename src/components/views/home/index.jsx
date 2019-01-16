@@ -3,8 +3,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-import * as homeActions from './actions';
-import * as homeFunctions from './functions';
+import * as actions from './actions';
 
 export class Home extends Component {
 

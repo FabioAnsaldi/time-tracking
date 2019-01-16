@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
+import * as actions from './actions';
 import Topbar from '../widgets/topbar/index.jsx';
 import * as VIEWS from '../views/**/index.jsx';
 //import AlertDialog from '../../widgets/AlertDialog/index.jsx';
