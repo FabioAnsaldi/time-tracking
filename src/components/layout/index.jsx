@@ -1,6 +1,6 @@
 'use strict';
 
-import React, {Component, Suspense} from 'react';
+import React, {Component, Suspense, lazy} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
@@ -8,7 +8,7 @@ import {withRouter} from 'react-router';
 import * as VIEWS from '../views/**/index.jsx';
 //import AlertDialog from '../../widgets/AlertDialog/index.jsx';
 //import WinDialog from '../../widgets/WinDialog/index.jsx';
-const Topbar = React.lazy(() => import('../widgets/topbar/index.jsx'));
+const Topbar = lazy(() => import('../widgets/topbar/index.jsx'));
 
 export class Layout extends Component {
 
