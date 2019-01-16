@@ -13,7 +13,14 @@ module.exports = merge( common, {
     ],
     devServer: {
         contentBase: path.join( process.cwd(), config.app.build ),
-        hot: true
+        hot: true,
+        historyApiFallback: {
+            rewrites: [
+                {from: config.app.bundle, to: '/' + config.app.bundle},
+                {from: 'manifest.json', to: '/manifest.json'},
+                {from: /^\/.*$/, to: '/'}
+            ]
+        }
     },
     mode: 'development'
 } );
