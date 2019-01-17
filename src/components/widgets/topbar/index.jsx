@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
+import {Link, withRouter} from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -39,7 +39,7 @@ export class Topbar extends Component {
                 {this.props.applicationState.routes.map((obj, index) => (
                     <ListItem button key={obj.viewFolderName}>
                         <ListItemIcon>{index % 2 === 0 ? <HomeIcon/> : <TrackChanges/>}</ListItemIcon>
-                        <ListItemText primary={obj.label}/>
+                        <Link to={obj.path}><ListItemText primary={obj.label}/></Link>
                     </ListItem>
                 ))}
             </List>
@@ -52,9 +52,7 @@ export class Topbar extends Component {
                     <IconButton color="inherit" aria-label="Menu" onClick={this.toggleDrawer}>
                         <MenuIcon/>
                     </IconButton>
-                    <Typography variant="h6" color="inherit">
-                        News
-                    </Typography>
+                    <Typography variant="h6" color="inherit"> News </Typography>
                 </Toolbar>
                 <Drawer open={open} onClose={this.toggleDrawer}>
                     <div
