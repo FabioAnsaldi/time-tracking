@@ -1,11 +1,8 @@
 'use strict';
 
-import React, {Component, Suspense, lazy} from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import React, {Component, lazy, Suspense} from 'react';
+import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
-
-import * as VIEWS from '../views/**/index.jsx';
 //import AlertDialog from '../../widgets/AlertDialog/index.jsx';
 //import WinDialog from '../../widgets/WinDialog/index.jsx';
 const Topbar = lazy(() => import('../widgets/topbar/index.jsx'));
@@ -16,16 +13,19 @@ export class Layout extends Component {
 
         const defaultView = this.props.applicationState.routes.reduce((accumulator, current, i) => {
 
-            return current.default ? (<Redirect from="/" to="/home"/>) : accumulator;
+            return current.default ? (<Redirect to="/home/"/>) : accumulator;
         }, {});
 
         const viewsList = (
-            <Switch>
-                {this.props.applicationState.routes.map((obj, i) => (
-                    <Route key={i} exact path={obj.path} component={VIEWS[obj.viewFolderName]}/>
-                ))}
-                {defaultView}
-            </Switch>
+            <Suspense fallback={<div></div>}>
+                <Switch>
+                    {this.props.applicationState.routes.map((obj, i) => {
+                        let View = lazy(() => import(`../views/${obj.viewFolderName}/index.jsx`));
+                        return <Route key={i} exact path={obj.path} component={props => <View {...props} />}/>
+                    })}
+                    {defaultView}
+                </Switch>
+            </Suspense>
         );
 
         return (

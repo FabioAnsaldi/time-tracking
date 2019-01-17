@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as actions from './actions';
+import {withRouter} from 'react-router-dom';
 import Layout from '../layout/index.jsx';
 
 export class Application extends Component {
@@ -23,4 +23,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(Application);
+export default withRouter(connect(mapStateToProps)(Application));
