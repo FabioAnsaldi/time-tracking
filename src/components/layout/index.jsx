@@ -13,13 +13,14 @@ export class Layout extends Component {
 
         const defaultView = this.props.applicationState.routes.reduce((accumulator, current, i) => {
 
-            return current.default ? (<Redirect to="/home/"/>) : accumulator;
-        }, {});
+            return current.default ? (<Redirect to={`${current.path}`}/>) : accumulator;
+        }, null);
 
         const viewsList = (
             <Suspense fallback={<div></div>}>
                 <Switch>
                     {this.props.applicationState.routes.map((obj, i) => {
+
                         let View = lazy(() => import(`../views/${obj.viewFolderName}/index.jsx`));
                         return <Route key={i} exact path={obj.path} component={props => <View {...props} />}/>
                     })}

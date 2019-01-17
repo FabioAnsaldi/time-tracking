@@ -11,15 +11,6 @@ export const resetApplication = () => {
     }, initialState);
 };
 
-export const setMenuState = (input) => {
-
-    return {
-
-        type: TYPES.SET_MENU_STATE,
-        menuOpen: input
-    };
-};
-
 export const setRoutes = (input) => {
 
     return {

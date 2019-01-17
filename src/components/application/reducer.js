@@ -4,19 +4,7 @@ import TYPES from './types';
 
 export const initialState = {
 
-    routes: [
-        {
-            default: true,
-            label: 'Home',
-            path: '/home',
-            viewFolderName: 'home'
-        },
-        {
-            label: 'Tracking',
-            path: '/tracking',
-            viewFolderName: 'tracking'
-        }
-    ],
+    routes: [],
     error: ''
 };
 

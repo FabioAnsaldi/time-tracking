@@ -10,6 +10,12 @@ module.exports = merge( common, {
 
     plugins: [
 
+        new webpack.DefinePlugin({
+            'process.env': {
+
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+            },
+        }),
         new webpack.HotModuleReplacementPlugin()
     ],
     devServer: {
@@ -19,6 +25,7 @@ module.exports = merge( common, {
         historyApiFallback: {
 
             rewrites: [
+
                 {from: config.app.bundle, to: '/' + config.app.bundle},
                 {from: 'manifest.json', to: '/manifest.json'},
                 {from: /^\/.*$/, to: '/'}

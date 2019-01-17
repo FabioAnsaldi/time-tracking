@@ -1,0 +1,17 @@
+{
+  "routes": [
+    {
+      "id": 1,
+      "default": true,
+      "label": "Home",
+      "path": "/home",
+      "viewFolderName": "home"
+    },
+    {
+      "id": 2,
+      "label": "Tracking",
+      "path": "/tracking",
+      "viewFolderName": "tracking"
+    }
+  ]
+}

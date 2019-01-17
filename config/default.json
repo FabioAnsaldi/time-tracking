@@ -1,11 +1,11 @@
 {
   "web": {
-    "address": "127.0.0.1",
+    "address": "localhost",
     "port": "8080"
   },
   "database": {
-    "address": "127.0.0.1",
-    "port": "3306",
+    "address": "localhost",
+    "port": "3000",
     "user": "root",
     "password": ""
   }
