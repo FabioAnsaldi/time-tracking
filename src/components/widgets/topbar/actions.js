@@ -20,6 +20,15 @@ export const setOpen = (input) => {
     };
 };
 
+export const setTitle = (input) => {
+
+    return {
+
+        type: TYPES.SET_TITLE,
+        title: input
+    };
+};
+
 export const setError = (input) => {
 
     return {

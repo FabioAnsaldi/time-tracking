@@ -23,6 +23,7 @@ export class Topbar extends Component {
 
         super(props);
         this.toggleDrawer = this.toggleDrawer.bind(this);
+        this.setPageTitle = this.setPageTitle.bind(this);
     }
 
     toggleDrawer() {
@@ -31,6 +32,29 @@ export class Topbar extends Component {
 
         this.props.dispatch(actions.setOpen(!open));
     };
+
+    setPageTitle() {
+
+        const {pathname} = this.props.location;
+
+        let title = pathname.replace(/\//g, '').charAt(0).toUpperCase() + pathname.replace(/\//g, '').slice(1);
+
+        this.props.dispatch(actions.setTitle(title));
+    }
+
+    componentWillMount() {
+
+        this.setPageTitle();
+    }
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+
+        if (nextProps.topbarState.title.toLowerCase() !== nextProps.location.pathname.replace(/\//g, '')) {
+
+            this.setPageTitle();
+        }
+        return true;
+    }
 
     render() {
 
@@ -44,6 +68,7 @@ export class Topbar extends Component {
                 ))}
             </List>
         );
+
         const {open} = this.props.topbarState;
 
         return (
@@ -52,7 +77,7 @@ export class Topbar extends Component {
                     <IconButton color="inherit" aria-label="Menu" onClick={this.toggleDrawer}>
                         <MenuIcon/>
                     </IconButton>
-                    <Typography variant="h6" color="inherit"> News </Typography>
+                    <Typography variant="h6" color="inherit"> {this.props.topbarState.title} </Typography>
                 </Toolbar>
                 <Drawer open={open} onClose={this.toggleDrawer}>
                     <div

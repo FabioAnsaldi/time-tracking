@@ -1,6 +1,7 @@
 let actions_types = [
     'RESET_STATE',
     'SET_OPEN',
+    'SET_TITLE',
     'SET_ERROR'
 ];
 
