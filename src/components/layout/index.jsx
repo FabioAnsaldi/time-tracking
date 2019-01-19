@@ -31,17 +31,7 @@ export class Layout extends Component {
 
         return (
             <div>
-                <header>
-                    <Suspense fallback={<div></div>}>
-                        <Topbar/>
-                    </Suspense>
-                </header>
-                <main>
-                    {viewsList}
-                </main>
-                <footer>
-                    <p>Powered by React + Redux</p>
-                </footer>
+                LAy
             </div>
         );
     }

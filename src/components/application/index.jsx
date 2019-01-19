@@ -5,7 +5,9 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import axios from 'axios';
 import Layout from '../layout/index.jsx';
+import layoutState from '../layout/reducer.js';
 import * as actions from './actions';
+import {withReducer} from "../../combiner/withReducer";
 
 export class Application extends Component {
 
@@ -40,4 +42,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default withRouter(connect(mapStateToProps)(Application));
+export default withReducer("layoutState", layoutState)(Application);

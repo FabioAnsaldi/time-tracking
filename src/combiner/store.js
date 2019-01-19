@@ -11,15 +11,28 @@ const logger = createLogger({
         return process.env.NODE_ENV !== 'production';
     }
 });
-const store = createStore(combiner(), applyMiddleware(logger));
+
+const initializeStore = () => {
+
+    const store = createStore(combiner(), applyMiddleware(logger));
+
+    store.asyncReducers = {};
+    store.injectReducer = (key, reducer) => {
+console.log(key, reducer);
+        store.asyncReducers[key] = reducer;
+        store.replaceReducer(combiner(store.asyncReducers));
+        return store;
+    };
+    return store;
+};
 
 if (module.hot) {
     // Enable Webpack hot module replacement for combiner
     module.hot.accept('../combiner', () => {
 
         const nextReducer = combiner();
-        store.replaceReducer(nextReducer);
+        initializeStore().replaceReducer(nextReducer);
     });
 }
 
-export default store;
+export default initializeStore;
