@@ -13,5 +13,13 @@
       "path": "/tracking",
       "viewFolderName": "tracking"
     }
+  ],
+  "projects": [
+    {
+      "name": "Time Traking Project",
+      "created": "Mon Jan 07 2019 16:17:18 GMT+0100 (Ora standard dell’Europa centrale)",
+      "startTime": 1546874238000,
+      "time": 0
+    }
   ]
 }

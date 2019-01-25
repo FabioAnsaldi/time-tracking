@@ -3,7 +3,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-import * as actions from './actions';
+import Grid from '@material-ui/core/Grid';
+import Addnew from '../../widgets/addnew/index.jsx';
 
 export class Tracking extends Component {
 
@@ -11,7 +12,11 @@ export class Tracking extends Component {
 
         return (
             <div>
-                Tracking page
+                <Grid container spacing={24}>
+                    <Grid item xs={12}>
+                        <Addnew/>
+                    </Grid>
+                </Grid>
             </div>
         );
     }
