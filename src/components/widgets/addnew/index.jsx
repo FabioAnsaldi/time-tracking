@@ -14,12 +14,13 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import Paper from '@material-ui/core/Paper';
 import {withStyles} from '@material-ui/core/styles';
+import Grid from "@material-ui/core/Grid";
 
 const styles = theme => ({
     root: {
         width: '100%',
         maxWidth: 600,
-    },
+    }
 });
 
 export class Addnew extends Component {
@@ -48,7 +49,6 @@ export class Addnew extends Component {
 
     setNewValue(e) {
 
-
         this.props.dispatch(actions.setValue(e.target.value));
     }
 
@@ -70,8 +70,10 @@ export class Addnew extends Component {
             startTime: 0,
             time: 0
         };
+
         projects.push(newProject);
         this.props.dispatch(actions.addNewProject(projects));
+        this.props.dispatch(actions.setValue(e.target.value));
     };
 
     render() {
@@ -91,20 +93,26 @@ export class Addnew extends Component {
         return (
             <div>
                 <Paper>
-                    <h1>Add new project</h1>
-                </Paper>
-                <Paper>
+                    <h2>Add new project</h2>
                     <form onSubmit={this.newProject}>
-                        <Input value={this.props.addnewState.value} onChange={this.setNewValue}/>
-                        <Button variant="contained" type="submit" onClick={this.newProject}>
-                            Add new
-                        </Button>
+                        <Grid container spacing={24}>
+                            <Grid item xs={2}>
+                                <Input value={this.props.addnewState.value} onChange={this.setNewValue}/>
+                            </Grid>
+                            <Grid item xs={1}>
+                                <Button variant="contained" type="submit" onClick={this.newProject}>
+                                    Add new
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </form>
                 </Paper>
-                <h2>Projects List</h2>
-                <List className={classes.root}>
-                    {viewsList}
-                </List>
+                <Paper>
+                    <h2>Projects List</h2>
+                    <List className={classes.root}>
+                        {viewsList}
+                    </List>
+                </Paper>
             </div>
         );
     }
