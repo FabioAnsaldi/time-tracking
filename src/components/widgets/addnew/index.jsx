@@ -13,6 +13,7 @@ import Avatar from '@material-ui/core/Avatar';
 import WorkIcon from '@material-ui/icons/Work';
 import Button from '@material-ui/core/Button';
 import PlayArrow from '@material-ui/icons/PlayArrow';
+import Pause from '@material-ui/icons/Pause';
 import Delete from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
@@ -27,7 +28,11 @@ const styles = theme => ({
 
         width: '100%',
         maxWidth: 650,
+    },
+    recording: {
+        backgroundColor: '#78ad6f'
     }
+
 });
 
 export class Addnew extends Component {
@@ -37,6 +42,7 @@ export class Addnew extends Component {
         super(props);
         this.newProject = this.newProject.bind(this);
         this.setNewValue = this.setNewValue.bind(this);
+        this.startFetchingRecording();
     }
 
     componentWillMount() {
@@ -52,6 +58,27 @@ export class Addnew extends Component {
 
                 this.props.dispatch(actions.setProjects(response.data));
             });
+    }
+
+    startFetchingRecording() {
+
+        setInterval(() => {
+
+            let {projects} = this.props.addnewState;
+
+            projects = projects.map((current, i) => {
+
+                if (current.recording) {
+
+                    let d = new Date(current.time);
+
+                    d.setSeconds(d.getSeconds() + 1);
+                    current.time = d.getTime();
+                }
+                return current;
+            });
+            this.props.dispatch(actions.setProjects(projects));
+        }, 1000);
     }
 
     pushNewProject(obj) {
@@ -74,15 +101,35 @@ export class Addnew extends Component {
             });
     }
 
-    startRecord() {
+    startStopRecord(e, obj) {
 
-        window.console.log("startRecord!");
+        let {projects} = this.props.addnewState;
+
+        obj.recording = !obj.recording;
+        axios({
+
+            method: 'put',
+            baseURL: `http://${process.env.API_URL.database.address}:${process.env.API_URL.database.port}`,
+            url: `/projects/${obj.id}`,
+            data: obj,
+            headers: {'Content-Type': 'application/json'},
+            timeout: 500,
+        })
+            .then((response) => {
+
+                projects = projects.filter((current) => {
+
+                    return current.id !== obj.id;
+                });
+                projects.push(response.data);
+                this.props.dispatch(actions.setProjects(projects));
+            });
     }
 
     deleteElement(e, obj) {
 
         let {projects} = this.props.addnewState;
-        console.log('deleteElement', obj);
+
         axios({
 
             method: 'delete',
@@ -92,12 +139,10 @@ export class Addnew extends Component {
         })
             .then((response) => {
 
-                console.log(response);
-                let removeMe = projects.filter((current) => {
+                projects = projects.filter((current) => {
 
-                    return current.id === obj.id;
+                    return current.id !== obj.id;
                 });
-                projects.pop(removeMe);
                 this.props.dispatch(actions.setProjects(projects));
             });
     }
@@ -146,7 +191,8 @@ export class Addnew extends Component {
             name: value,
             created: date.toString(),
             startTime: 0,
-            time: 0
+            time: 0,
+            recording: false
         };
 
         this.setNewValue('');
@@ -160,7 +206,7 @@ export class Addnew extends Component {
         const viewsList = this.props.addnewState.projects.map((obj, i) => {
 
             return (
-                <ListItem key={i}>
+                <ListItem key={i}  className={obj.recording ? classes.recording: null}>
                     <Avatar><WorkIcon/></Avatar>
                     <ListItemText primary={obj.name} secondary={
                         <React.Fragment>
@@ -174,8 +220,8 @@ export class Addnew extends Component {
                         <IconButton aria-label="Delete" onClick={e => this.deleteElement(e, obj)}>
                             <Delete/>
                         </IconButton>
-                        <IconButton aria-label="Play" onClick={this.startRecord}>
-                            <PlayArrow/>
+                        <IconButton aria-label="Play" onClick={e => this.startStopRecord(e, obj)}>
+                            {obj.recording ? (<Pause/>) : (<PlayArrow/>)}
                         </IconButton>
                     </ListItemSecondaryAction>
                 </ListItem>
