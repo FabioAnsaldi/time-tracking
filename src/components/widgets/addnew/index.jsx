@@ -13,6 +13,7 @@ import Avatar from '@material-ui/core/Avatar';
 import WorkIcon from '@material-ui/icons/Work';
 import Button from '@material-ui/core/Button';
 import PlayArrow from '@material-ui/icons/PlayArrow';
+import Delete from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
@@ -21,9 +22,11 @@ import {withStyles} from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 
 const styles = theme => ({
+
     root: {
+
         width: '100%',
-        maxWidth: 600,
+        maxWidth: 650,
     }
 });
 
@@ -51,9 +54,59 @@ export class Addnew extends Component {
             });
     }
 
+    pushNewProject(obj) {
+
+        let {projects} = this.props.addnewState;
+
+        axios({
+
+            method: 'post',
+            baseURL: `http://${process.env.API_URL.database.address}:${process.env.API_URL.database.port}`,
+            data: obj,
+            headers: {'Content-Type': 'application/json'},
+            url: '/projects',
+            timeout: 500,
+        })
+            .then((response) => {
+
+                projects.push(response.data);
+                this.props.dispatch(actions.setProjects(projects));
+            });
+    }
+
+    startRecord() {
+
+        window.console.log("startRecord!");
+    }
+
+    deleteElement(e, obj) {
+
+        let {projects} = this.props.addnewState;
+        console.log('deleteElement', obj);
+        axios({
+
+            method: 'delete',
+            baseURL: `http://${process.env.API_URL.database.address}:${process.env.API_URL.database.port}`,
+            url: `/projects/${obj.id}`,
+            timeout: 500,
+        })
+            .then((response) => {
+
+                console.log(response);
+                let removeMe = projects.filter((current) => {
+
+                    return current.id === obj.id;
+                });
+                projects.pop(removeMe);
+                this.props.dispatch(actions.setProjects(projects));
+            });
+    }
+
     setNewValue(e) {
 
-        this.props.dispatch(actions.setValue(e.target.value));
+        let value = e && e.target && e.target.value || e;
+
+        this.props.dispatch(actions.setValue(value));
     }
 
     getDifferenceTime(date1, date2) {
@@ -74,7 +127,7 @@ export class Addnew extends Component {
 
         let date = this.getDifferenceTime(obj.startTime, obj.time);
 
-        return `${date.days} Days, ${date.hours} hours, ${date.minutes} minutes, ${date.seconds} minutes`;
+        return `${date.days} Days, ${date.hours} hours, ${date.minutes} minutes and ${date.seconds} seconds`;
     }
 
     newProject(e) {
@@ -96,9 +149,8 @@ export class Addnew extends Component {
             time: 0
         };
 
-        projects.push(newProject);
-        this.props.dispatch(actions.addNewProject(projects));
-        this.props.dispatch(actions.setValue(e.target.value));
+        this.setNewValue('');
+        this.pushNewProject(newProject);
     };
 
     render() {
@@ -119,7 +171,12 @@ export class Addnew extends Component {
                         </React.Fragment>
                     }/>
                     <ListItemSecondaryAction>
-                        <IconButton aria-label="Record"> <PlayArrow/> </IconButton>
+                        <IconButton aria-label="Delete" onClick={e => this.deleteElement(e, obj)}>
+                            <Delete/>
+                        </IconButton>
+                        <IconButton aria-label="Play" onClick={this.startRecord}>
+                            <PlayArrow/>
+                        </IconButton>
                     </ListItemSecondaryAction>
                 </ListItem>
             )
@@ -129,7 +186,7 @@ export class Addnew extends Component {
             <div>
                 <Paper>
                     <h2>Add new project</h2>
-                    <form onSubmit={this.newProject}>
+                    <form name="theForm" id="theForm">
                         <Grid container spacing={24}>
                             <Grid item xs={2}>
                                 <TextField id="project-name" value={this.props.addnewState.value}

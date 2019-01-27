@@ -2,7 +2,6 @@ let actions_types = [
     'RESET_STATE',
     'SET_PROJECTS',
     'SET_VALUE',
-    'ADD_NEWPROJECT',
     'SET_ERROR'
 ];
 

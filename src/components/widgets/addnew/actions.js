@@ -29,15 +29,6 @@ export const setValue = (input) => {
     };
 };
 
-export const addNewProject = (input) => {
-
-    return {
-
-        type: TYPES.ADD_NEWPROJECT,
-        projects: input
-    };
-};
-
 export const setError = (input) => {
 
     return {
