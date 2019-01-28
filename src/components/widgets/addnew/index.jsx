@@ -46,6 +46,23 @@ export class Addnew extends Component {
 
     componentWillMount() {
 
+        window.addEventListener("beforeunload", (e) => {
+
+            let {projects} = this.props.addnewState;
+            let isRecording = projects.filter((current) => {
+
+                return current.recording;
+            });
+            let confirmationMessage = "\o/";
+
+            isRecording.forEach((obj) => {
+
+                this.startStopRecord(this, obj, false);
+            });
+            (e || window.event).returnValue = confirmationMessage;
+            return confirmationMessage;
+        });
+
         axios({
 
             method: 'get',
@@ -63,7 +80,16 @@ export class Addnew extends Component {
     startFetchingRecording() {
 
         let {projects, interval} = this.props.addnewState;
+        let isRecording = projects.filter((current) => {
 
+            return current.recording;
+        });
+        if (isRecording.length < 1) {
+
+            clearInterval(interval);
+            this.props.dispatch(actions.setInterval(null));
+            return;
+        }
         if (interval) {
 
             return;
@@ -106,11 +132,11 @@ export class Addnew extends Component {
             });
     }
 
-    startStopRecord(e, obj) {
+    startStopRecord(e, obj, recording) {
 
         let {projects} = this.props.addnewState;
 
-        obj.recording = !obj.recording;
+        obj.recording = typeof recording === "boolean" ? recording : !obj.recording;
         axios({
 
             method: 'put',
@@ -128,6 +154,7 @@ export class Addnew extends Component {
                 });
                 projects.push(response.data);
                 this.props.dispatch(actions.setProjects(projects));
+                this.startFetchingRecording();
             });
     }
 
@@ -211,7 +238,7 @@ export class Addnew extends Component {
         const viewsList = this.props.addnewState.projects.map((obj, i) => {
 
             return (
-                <ListItem key={i}  className={obj.recording ? classes.recording: null}>
+                <ListItem key={i} className={obj.recording ? classes.recording : null}>
                     <Avatar><WorkIcon/></Avatar>
                     <ListItemText primary={obj.name} secondary={
                         <React.Fragment>
