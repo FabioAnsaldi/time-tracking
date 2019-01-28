@@ -42,7 +42,6 @@ export class Addnew extends Component {
         super(props);
         this.newProject = this.newProject.bind(this);
         this.setNewValue = this.setNewValue.bind(this);
-        this.startFetchingRecording();
     }
 
     componentWillMount() {
@@ -57,14 +56,19 @@ export class Addnew extends Component {
             .then((response) => {
 
                 this.props.dispatch(actions.setProjects(response.data));
+                this.startFetchingRecording();
             });
     }
 
     startFetchingRecording() {
 
-        setInterval(() => {
+        let {projects, interval} = this.props.addnewState;
 
-            let {projects} = this.props.addnewState;
+        if (interval) {
+
+            return;
+        }
+        let _interval = setInterval(() => {
 
             projects = projects.map((current, i) => {
 
@@ -79,6 +83,7 @@ export class Addnew extends Component {
             });
             this.props.dispatch(actions.setProjects(projects));
         }, 1000);
+        this.props.dispatch(actions.setInterval(_interval));
     }
 
     pushNewProject(obj) {
@@ -190,8 +195,8 @@ export class Addnew extends Component {
 
             name: value,
             created: date.toString(),
-            startTime: 0,
-            time: 0,
+            startTime: date.getTime(),
+            time: date.getTime(),
             recording: false
         };
 

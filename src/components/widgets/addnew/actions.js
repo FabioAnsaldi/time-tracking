@@ -29,6 +29,15 @@ export const setValue = (input) => {
     };
 };
 
+export const setInterval = (input) => {
+
+    return {
+
+        type: TYPES.SET_INTERVAL,
+        interval: input
+    };
+};
+
 export const setError = (input) => {
 
     return {
