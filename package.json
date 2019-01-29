@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --config ./config/webpack.prod.js",
     "dev": "yarn run db | webpack-dev-server --config ./config/webpack.dev.js",
+    "debug": "node $NODE_DEBUG_OPTION node_modules/.bin/webpack-dev-server --config ./config/webpack.dev.js",
     "db": "json-server --watch db.json",
     "start": "node index.js",
     "test": "mocha || true"
