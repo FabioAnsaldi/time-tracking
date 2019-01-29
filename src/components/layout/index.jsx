@@ -3,8 +3,6 @@
 import React, {Component, lazy, Suspense} from 'react';
 import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-//import AlertDialog from '../../widgets/AlertDialog/index.jsx';
-//import WinDialog from '../../widgets/WinDialog/index.jsx';
 const Topbar = lazy(() => import('../widgets/topbar/index.jsx'));
 
 export class Layout extends Component {
