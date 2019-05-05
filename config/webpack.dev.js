@@ -18,6 +18,7 @@ module.exports = merge( common, {
         }),
         new webpack.HotModuleReplacementPlugin()
     ],
+    devtool: 'eval-source-map',
     devServer: {
 
         contentBase: path.join( process.cwd(), config.app.build ),
